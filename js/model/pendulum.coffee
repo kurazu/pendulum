@@ -6,7 +6,7 @@ define ['model/vector'], (Vector) ->
             @setAngle 0
             @setStyle @defaultStyle
         setAngle: (@angle) ->
-            arrow = new Vector angle + (Math.PI * 1.5), @length
+            arrow = new Vector angle - (Math.PI / 2), @length
             @position = @anchor.addVector arrow
         setStyle: (@style) ->
 
