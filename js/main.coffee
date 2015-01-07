@@ -1,4 +1,4 @@
-require [], () ->
+require ['controller/game'], (Game) ->
     screen = document.getElementById 'screen'
-    console.log 'init'
-
+    game = new Game screen
+    game.start()
