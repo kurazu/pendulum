@@ -16,6 +16,15 @@ define ['util/loop', 'controller/screen', 'controller/pendulum'], (run_loop, Scr
             @objects.push object
         prepare: () ->
             @add new Screen @canvas.width, @canvas.height
-            @add new Pendulum 200, 100, 200, 1
+            left = new Pendulum 100, 150, 100, 1
+            left.model.setAngle -Math.PI / 4
+            left.model.setStyle 'green'
+            center = new Pendulum 300, 150, 100, 1
+            right = new Pendulum 500, 150, 100, 1
+            right.model.setAngle Math.PI / 4
+            right.model.setStyle 'red'
+            @add left
+            @add center
+            @add right
 
 

@@ -1,13 +1,13 @@
 define [], () ->
 
     class BaseController
-        model_class: null
-        view_class: null
+        modelClass: null
+        viewClass: null
         constructor: () ->
             args = @modelParameters.apply @, arguments
-            model_constructor = this.model_class.bind.apply this.model_class, [null].concat args
+            model_constructor = this.modelClass.bind.apply this.modelClass, [null].concat args
             @model = new model_constructor
-            @view = new @view_class @model
+            @view = new @viewClass @model
         modelParameters: () ->
             Array::slice.call arguments
         act: (diff) ->

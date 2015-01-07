@@ -6,9 +6,12 @@ define ['view/base'], (BaseView) ->
             anchor_x = @model.anchor.x
             anchor_y = @model.anchor.y
 
-            pendulum_x = anchor_x
-            pendulum_y = anchor_y + @model.length
+            pendulum_x = @model.position.x
+            pendulum_y = @model.position.y
             pendulum_radius = 10
+
+            ctx.strokeStyle = @model.style
+            ctx.fillStyle = @model.style
 
             ctx.beginPath()
             ctx.arc anchor_x, anchor_y, @anchor_radius, 0, Math.PI * 2, false
