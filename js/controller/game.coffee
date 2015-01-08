@@ -20,12 +20,15 @@ define ['util/loop', 'controller/screen', 'controller/pendulum'], (run_loop, Scr
         prepare: () ->
             @screen = new Screen @canvas.width, @canvas.height
 
-            left = new Pendulum 100, 250, -Math.PI / 4, 100, 1
+            left = new Pendulum 100, 250, -Math.PI / 4, 100, 1, 0.1
             left.model.setStyle 'green'
-            center = new Pendulum 300, 250, 0, 100, 1
-            right = new Pendulum 500, 250, Math.PI / 4, 100, 1
+            left2 = new Pendulum 200, 250, -Math.PI / 4, 100, 1, 0.3
+            left2.model.setStyle 'blue'
+            center = new Pendulum 300, 250, 0, 100, 1, 0.2
+            right = new Pendulum 500, 250, Math.PI / 4, 100, 1, 0.1
             right.model.setStyle 'red'
             @add left
+            @add left2
             @add center
             @add right
 
