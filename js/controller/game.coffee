@@ -10,20 +10,20 @@ define ['util/loop', 'controller/screen', 'controller/pendulum'], (run_loop, Scr
         step: (diff) ->
             for object in @objects
                 object.act diff
+
+            @screen.beginDraw @ctx
             for object in @objects
                 object.draw @ctx
+            @screen.endDraw @ctx
         add: (object) ->
             @objects.push object
         prepare: () ->
-            @ctx.translate 0, @canvas.height
-            @ctx.scale 1, -1
-            @add new Screen @canvas.width, @canvas.height
-            left = new Pendulum 100, 250, 100, 1
-            left.model.setAngle -Math.PI / 4
+            @screen = new Screen @canvas.width, @canvas.height
+
+            left = new Pendulum 100, 250, -Math.PI / 4, 100, 1
             left.model.setStyle 'green'
-            center = new Pendulum 300, 250, 100, 1
-            right = new Pendulum 500, 250, 100, 1
-            right.model.setAngle Math.PI / 4
+            center = new Pendulum 300, 250, 0, 100, 1
+            right = new Pendulum 500, 250, Math.PI / 4, 100, 1
             right.model.setStyle 'red'
             @add left
             @add center

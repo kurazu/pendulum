@@ -6,8 +6,7 @@ define ['view/base'], (BaseView) ->
             anchor_x = @model.anchor.x
             anchor_y = @model.anchor.y
 
-            pendulum_x = @model.position.x
-            pendulum_y = @model.position.y
+            {x: pendulum_x, y: pendulum_y} = @model.getEndPoint()
             pendulum_radius = 10
 
             ctx.strokeStyle = @model.style

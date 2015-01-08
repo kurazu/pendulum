@@ -1,10 +1,24 @@
-define ['controller/base', 'model/pendulum', 'model/point', 'view/pendulum'], (BaseController, PendulumModel, Point, PendulumView) ->
+define ['controller/base', 'model/pendulum', 'model/point', 'view/pendulum', 'model/vector', 'model/weight'], (BaseController, PendulumModel, Point, PendulumView, Vector, Weight) ->
+
+    GRAVITY_ACCELERATION = new Vector -Math.PI / 2, 9 * 100
 
     class Pendulum extends BaseController
         modelClass: PendulumModel
         viewClass: PendulumView
-        modelParameters: (anchor_x, anchor_y, length, weight) ->
+        modelParameters: (anchor_x, anchor_y, angle, length, mass) ->
             anchor = new Point anchor_x, anchor_y
-            return [anchor, length, weight]
+            angle -= Math.PI / 2
+            vector = new Vector angle, length
+            weight = new Weight mass
+            return [anchor, vector, weight]
         act: (diff) ->
+            seconds = diff / 1000
+            gravity_accelerations = GRAVITY_ACCELERATION.decomposeAlong @model.vector
+            side_acceleration = gravity_accelerations.perpendicular
 
+            velocity_change = side_acceleration.length * seconds
+
+            @model.weight.velocity += velocity_change
+
+            angle_change = @model.weight.velocity * seconds / @model.vector.length
+            @model.vector.angle += angle_change

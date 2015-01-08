@@ -1,13 +1,11 @@
-define ['model/vector'], (Vector) ->
+define [], () ->
 
     class PendulumModel
         defaultStyle: 'black'
-        constructor: (@anchor, @length, @weight) ->
-            @setAngle 0
+        constructor: (@anchor, @vector, @weight) ->
             @setStyle @defaultStyle
-        setAngle: (@angle) ->
-            arrow = new Vector angle - (Math.PI / 2), @length
-            @position = @anchor.addVector arrow
+        getEndPoint: () ->
+            return @anchor.addVector @vector
         setStyle: (@style) ->
 
 
